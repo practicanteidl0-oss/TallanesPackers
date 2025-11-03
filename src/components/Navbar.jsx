@@ -7,6 +7,24 @@ function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
+  const [dropdownTimeout, setDropdownTimeout] = useState(null);
+
+  // Función para manejar la apertura del dropdown
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout);
+      setDropdownTimeout(null);
+    }
+    setIsDropdownOpen(true);
+  };
+
+  // Función para manejar el cierre del dropdown con delay
+  const handleDropdownLeave = () => {
+    const timeout = setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 150); // 150ms de delay
+    setDropdownTimeout(timeout);
+  };
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -54,11 +72,11 @@ function Navbar() {
               <ul className="flex space-x-2 items-center">
                 <li className="relative group">
                   <a
-                    className={` hover:text-orange-500 font-medium px-3 py-2 transition-colors duration-200 rounded-3xl ${
-                      activeSection === 'inicio' 
-                        ? 'bg-orange-500 text-white hover:text-white' 
-                        : 'hover:bg-white/10'
-                    }`}
+                    className={` hover:text-tallanes font-medium px-3 py-2 transition-colors duration-200 rounded-3xl ${
+                activeSection === 'inicio' 
+                  ? 'bg-tallanes text-white hover:text-white'
+                  : 'text-stone-800 hover:text-tallanes'
+              }`}
                     href="#inicio"
                   >
                     <i className="fa fa-home mr-2"></i>Inicio
@@ -67,10 +85,10 @@ function Navbar() {
                 <li className="relative group">
                   <a
                     href="#about"
-                    className={` hover:text-orange-500 font-medium px-3 py-2 transition-colors duration-200 flex items-center rounded-3xl ${
+                    className={` hover:text-tallanes font-medium px-3 py-2 transition-colors duration-200 flex items-center rounded-3xl ${
                       activeSection === 'about' 
-                        ? 'bg-orange-500 text-white hover:text-white' 
-                        : 'hover:bg-white/10'
+                        ? 'bg-tallanes text-white hover:text-white' 
+                        : 'text-stone-800 hover:text-tallanes'
                     }`}
                   >
                     <i className="fa fa-users mr-2"></i>Somos Tallanes
@@ -79,13 +97,13 @@ function Navbar() {
                 <li className="relative group">
                   <a
                     href="#productos"
-                    className={` hover:text-orange-500 font-medium px-3 py-2 transition-colors duration-200 flex items-center rounded-3xl ${
-                      activeSection === 'productos' 
-                        ? 'bg-orange-500 text-white hover:text-white' 
-                        : 'hover:bg-white/10'
-                    }`}
-                    onMouseEnter={() => setIsDropdownOpen(true)}
-                    onMouseLeave={() => setIsDropdownOpen(false)}
+                    className={` hover:text-tallanes font-medium px-3 py-2 transition-colors duration-200 flex items-center rounded-3xl ${
+                activeSection === 'productos' 
+                  ? 'bg-tallanes text-white hover:text-white'
+                  : 'text-stone-800 hover:text-tallanes'
+              }`}
+                    onMouseEnter={handleDropdownEnter}
+                    onMouseLeave={handleDropdownLeave}
                   >
                     <i className="fa fa-cube mr-2"></i>Productos y Beneficios
                     <i className="fas fa-angle-down ml-1"></i>
@@ -98,27 +116,27 @@ function Navbar() {
           {/* Dropdown fuera del LiquidGlass */}
           <div 
             className="absolute top-full left-0 mt-2"
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
             style={{ left: 'calc(50% + 20px)' }}
+            onMouseEnter={handleDropdownEnter}
+            onMouseLeave={handleDropdownLeave}
           >
             <LiquidGlass
               borderRadius={30}
               blur={3}
               shadowIntensity={0.1}
-              contrast={0.8}
-              brightness={1.3}
-              saturation={0.5}
               elasticity={1}
               displacementScale={2}
               zIndex={9999}
+              contrast={0.2}
+              brightness={1.8}
+              saturation={1}
               className={`backdrop-blur-sm border border-white/20 rounded-sm transition-all duration-300 ${isDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
             >
               <ul className="w-56 py-2">
                 <li className="hover:bg-white/10 rounded-3xl mx-2">
                   <a
                     href="#noticias"
-                    className="block px-4 py-2 text-stone-800 text-sm hover:text-orange-500 transition-colors duration-200"
+                    className="block px-4 py-2 text-stone-800 text-sm hover:text-tallanes transition-colors duration-200"
                   >
                     <i className="fa-sharp fa-solid fa-check-double mr-2"></i>
                     Noticias Destacadas
@@ -127,7 +145,7 @@ function Navbar() {
                 <li className="hover:bg-white/10 rounded-3xl mx-2">
                   <a
                     href="#certificaciones"
-                    className="block px-4 py-2 text-stone-800 text-sm hover:text-orange-500 transition-colors duration-200"
+                    className="block px-4 py-2 text-stone-800 text-sm hover:text-tallanes transition-colors duration-200"
                   >
                     <i className="fa-solid fa-book mr-2"></i>Certificaciones
                     Globales
@@ -136,7 +154,7 @@ function Navbar() {
                 <li className="hover:bg-white/10 rounded-3xl mx-2">
                   <a
                     href="#galeria"
-                    className="block px-4 py-2 text-stone-800 text-sm hover:text-orange-500 transition-colors duration-200"
+                    className="block px-4 py-2 text-stone-800 text-sm hover:text-tallanes transition-colors duration-200"
                   >
                     <i className="fa fa-image mr-2"></i>Nuestra Galeria
                   </a>
@@ -153,24 +171,23 @@ function Navbar() {
               borderRadius={20}
               blur={3}
               shadowIntensity={0.1}
-              contrast={0.5}
-              brightness={1.5}
-              saturation={2}
-              elasticity={1}
-              displacementScale={1}
+              contrast={0.2}
+              brightness={1.8}
+              saturation={1}
+
               className="inline-block"
             >
               <a
-                href="#aliados"
-                className={`border font-medium px-4 py-2 rounded-full transition-colors duration-200 inline-block ${
-                  activeSection === 'aliados' 
-                    ? 'border-orange-500 bg-orange-500 text-white hover:bg-orange-600' 
-                    : 'border-orange-500 text-stone-800 hover:text-orange-500'
-                }`}
-                style={{ height: '40px', display: 'flex', alignItems: 'center' }}
-              >
-                <i className="fa fa-handshake mr-2"></i>Aliados
-              </a>
+            href="#aliados"
+            className={`border font-medium px-4 py-2 rounded-full transition-colors duration-200 inline-block ${
+              activeSection === 'aliados' 
+                ? 'border-tallanes bg-tallanes text-white hover:bg-tallanes-600' 
+                : 'border-tallanes text-stone-800 hover:text-tallanes'
+            }`}
+            style={{ height: '40px', display: 'flex', alignItems: 'center' }}
+          >
+            <i className="fa fa-handshake mr-2"></i>Aliados
+          </a>
             </LiquidGlass>
           </div>
 
@@ -178,8 +195,8 @@ function Navbar() {
             href="#contacto"
             className={`font-medium px-4 py-2 rounded-full transition-colors duration-200 inline-block ${
               activeSection === 'contacto' 
-                ? 'bg-orange-600 text-white hover:bg-orange-700' 
-                : 'bg-orange-500 text-white hover:bg-orange-600'
+                ? 'bg-tallanes-600 text-white hover:bg-tallanes-700' 
+                : 'bg-tallanes text-white hover:bg-tallanes-600'
             }`}
             style={{ height: '40px', display: 'flex', alignItems: 'center' }}
           >
@@ -193,8 +210,8 @@ function Navbar() {
             href="#aliados"
             className={`border font-medium px-3 py-2 rounded-full transition-colors duration-200 text-sm ${
               activeSection === 'aliados' 
-                ? 'border-orange-500 bg-orange-500 text-white hover:bg-orange-600' 
-                : 'border-orange-500 text-stone-800 hover:text-orange-500'
+                ? 'border-tallanes bg-tallanes text-white hover:bg-tallanes-600' 
+                : 'border-tallanes text-stone-800 hover:text-tallanes'
             }`}
           >
             <i className="fa fa-handshake mr-1"></i>Aliados
@@ -203,8 +220,8 @@ function Navbar() {
             href="#contacto"
             className={`font-medium px-3 py-2 rounded-full transition-colors duration-200 text-sm ${
               activeSection === 'contacto' 
-                ? 'bg-orange-600 text-white hover:bg-orange-700' 
-                : 'bg-orange-500 text-white hover:bg-orange-600'
+                ? 'bg-tallanes-600 text-white hover:bg-tallanes-700' 
+                : 'bg-tallanes text-white hover:bg-tallanes-600'
             }`}
           >
             <i className="fa-sharp fa-solid fa-phone mr-1"></i>Contacto
@@ -255,8 +272,8 @@ function Navbar() {
                 href="#inicio"
                 className={`flex items-center py-3 px-4 rounded-lg transition-colors duration-200 ${
                   activeSection === 'inicio' 
-                    ? 'bg-orange-500 text-white' 
-                    : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-orange-500'
+                    ? 'bg-tallanes text-white' 
+                    : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-tallanes'
                 }`}
                 onClick={() => {
                   setIsMenuOpen(false);
@@ -269,8 +286,8 @@ function Navbar() {
                 href="#about"
                 className={`flex items-center py-3 px-4 rounded-lg transition-colors duration-200 ${
                   activeSection === 'about' 
-                    ? 'bg-orange-500 text-white' 
-                    : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-orange-500'
+                    ? 'bg-tallanes text-white' 
+                    : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-tallanes'
                 }`}
                 onClick={() => {
                   setIsMenuOpen(false);
@@ -286,8 +303,8 @@ function Navbar() {
                   onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
                   className={`flex items-center justify-between w-full py-3 px-4 rounded-lg transition-colors duration-200 ${
                     activeSection === 'productos' 
-                      ? 'bg-orange-500 text-white' 
-                      : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-orange-500'
+                      ? 'bg-tallanes text-white' 
+                      : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-tallanes'
                   }`}
                 >
                   <div className="flex items-center">
@@ -304,7 +321,7 @@ function Navbar() {
                 }`}>
                   <a
                     href="#productos-locales"
-                    className="flex items-center py-2 px-4 text-stone-700 md:text-white hover:text-orange-500 hover:bg-white/5 rounded-lg transition-colors duration-200 text-sm"
+                    className="flex items-center py-2 px-4 text-stone-700 md:text-white hover:text-tallanes hover:bg-white/5 rounded-lg transition-colors duration-200 text-sm"
                     onClick={() => {
                       setIsMenuOpen(false);
                       setIsMobileDropdownOpen(false);
@@ -314,7 +331,7 @@ function Navbar() {
                   </a>
                   <a
                     href="#productos-globales"
-                    className="flex items-center py-2 px-4 text-stone-700 md:text-white hover:text-orange-500 hover:bg-white/5 rounded-lg transition-colors duration-200 text-sm"
+                    className="flex items-center py-2 px-4 text-stone-700 md:text-white hover:text-tallanes hover:bg-white/5 rounded-lg transition-colors duration-200 text-sm"
                     onClick={() => {
                       setIsMenuOpen(false);
                       setIsMobileDropdownOpen(false);
@@ -324,7 +341,7 @@ function Navbar() {
                   </a>
                   <a
                     href="#galeria"
-                    className="flex items-center py-2 px-4 text-stone-700 md:text-white hover:text-orange-500 hover:bg-white/5 rounded-lg transition-colors duration-200 text-sm"
+                    className="flex items-center py-2 px-4 text-stone-700 md:text-white hover:text-tallanes hover:bg-white/5 rounded-lg transition-colors duration-200 text-sm"
                     onClick={() => {
                       setIsMenuOpen(false);
                       setIsMobileDropdownOpen(false);
@@ -339,8 +356,8 @@ function Navbar() {
                 href="#aliados"
                 className={`flex items-center py-3 px-4 rounded-lg transition-colors duration-200 ${
                   activeSection === 'aliados' 
-                    ? 'bg-orange-500 text-white' 
-                    : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-orange-500'
+                    ? 'bg-tallanes text-white' 
+                    : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-tallanes'
                 }`}
                 onClick={() => {
                   setIsMenuOpen(false);
@@ -353,8 +370,8 @@ function Navbar() {
                 href="#contacto"
                 className={`flex items-center py-3 px-4 rounded-lg transition-colors duration-200 ${
                   activeSection === 'contacto' 
-                    ? 'bg-orange-500 text-white' 
-                    : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-orange-500'
+                    ? 'bg-tallanes text-white' 
+                    : 'text-stone-700 md:text-white hover:bg-white/10 hover:text-tallanes'
                 }`}
                 onClick={() => {
                   setIsMenuOpen(false);

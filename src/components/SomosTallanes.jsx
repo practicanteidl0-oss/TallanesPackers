@@ -152,7 +152,7 @@ function SomosTallanes() {
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-200 ${
                   index === currentSlide 
-                    ? 'bg-orange-500 scale-125' 
+                    ? 'bg-tallanes scale-125' 
                     : 'bg-gray-400 hover:bg-gray-600'
                 }`}
               />
@@ -168,7 +168,7 @@ function SomosTallanes() {
                   onClick={() => goToSlide(index)}
                   className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 whitespace-nowrap ${
                     index === currentSlide
-                      ? 'bg-orange-500 text-white'
+                      ? 'bg-tallanes text-white'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                   }`}
                 >

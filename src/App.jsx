@@ -7,6 +7,7 @@ import SomosTallanes from "./components/SomosTallanes";
 import CardsTallanes from "./components/CardsTallanes";
 import videoTallanes from "./assets/videos/videotallanes.mp4";
 import { LiquidGlass } from "@liquidglass/react";
+import ProductosYBeneficios from "./components/ProductosYBeneficios";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -39,6 +40,9 @@ function App() {
       
       {/* Sección Cards Tallanes */}
       <CardsTallanes />
+
+      {/* Sección Productos y Beneficios */}
+      <ProductosYBeneficios />
     </>
   );
 }

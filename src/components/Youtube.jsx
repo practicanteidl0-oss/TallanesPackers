@@ -38,7 +38,7 @@ function Youtube() {
               <h2 className="text-xl font-semibold text-white">Nuestro Video</h2>
               <button
                 onClick={closeModal}
-                className="text-white  text-xl font-semibold w-8 h-8 flex items-center justify-center rounded-full hover:bg-orange-500 transition-colors"
+                className="text-white  text-xl font-semibold w-8 h-8 flex items-center justify-center rounded-full hover:bg-tallanes transition-colors"
                 style={{ lineHeight: '1' }}
               >
                 ✕
