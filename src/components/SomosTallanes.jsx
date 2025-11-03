@@ -71,9 +71,9 @@ function SomosTallanes() {
   };
 
   return (
-    <section id="about" className="py-16 bg-gray-50">
+    <section id="about" className="py-8 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
+        <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-gray-800">
           Somos Tallanes
         </h2>
         
@@ -88,7 +88,7 @@ function SomosTallanes() {
               {timelineData.map((slide, index) => (
                 <div
                   key={index}
-                  className="w-full flex-shrink-0 relative h-96 md:h-[500px] overflow-hidden"
+                  className="w-full flex-shrink-0 relative h-[50vh] sm:h-96 md:h-[500px] overflow-hidden"
                 >
                   {/* Background Image with Blur */}
                   <div 
@@ -107,15 +107,15 @@ function SomosTallanes() {
                   <div className="absolute inset-0 bg-black bg-opacity-50"></div>
                   
                   {/* Content */}
-                  <div className="absolute inset-0 flex items-center justify-center p-8">
+                  <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8">
                     <div className="text-center text-white max-w-2xl">
-                      <span className="inline-block text-6xl font-bold mb-4 text-yellow-400">
+                      <span className="inline-block text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-3 md:mb-4 text-yellow-400">
                         {slide.year}
                       </span>
-                      <h4 className="text-3xl font-bold mb-6">
+                      <h4 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 md:mb-6">
                         {slide.title}
                       </h4>
-                      <p className="text-lg leading-relaxed">
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed px-2 sm:px-4 md:px-0">
                         {slide.text}
                       </p>
                     </div>
@@ -128,29 +128,29 @@ function SomosTallanes() {
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
+            className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 sm:p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
+            className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 sm:p-3 rounded-full transition-all duration-200 backdrop-blur-sm"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 space-x-2">
+          <div className="flex justify-center mt-4 sm:mt-6 md:mt-8 space-x-2">
             {timelineData.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-200 ${
                   index === currentSlide 
                     ? 'bg-orange-500 scale-125' 
                     : 'bg-gray-400 hover:bg-gray-600'

@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Youtube from "./components/Youtube";
 import WhatsApp from "./components/WhatsApp";
 import SomosTallanes from "./components/SomosTallanes";
+import CardsTallanes from "./components/CardsTallanes";
 import videoTallanes from "./assets/videos/videotallanes.mp4";
 import { LiquidGlass } from "@liquidglass/react";
 
@@ -15,10 +16,10 @@ function App() {
       <Navbar />
       <Youtube />
       <WhatsApp />
-      <div className="relative min-h-screen overflow-hidden">
+      <div className="relative h-[35vh] md:min-h-screen overflow-hidden">
         {/* Video de fondo */}
         <video
-          className="absolute inset-0 w-full h-full object-contain object-top md:object-cover md:object-center pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
           src={videoTallanes}
           autoPlay
           muted
@@ -35,6 +36,9 @@ function App() {
       
       {/* Sección Somos Tallanes */}
       <SomosTallanes />
+      
+      {/* Sección Cards Tallanes */}
+      <CardsTallanes />
     </>
   );
 }

@@ -13,7 +13,7 @@ function Youtube() {
       {/* Botón de YouTube flotante */}
       <button 
         onClick={openModal}
-        className="fixed bottom-10 left-10 w-20 h-12 hover:-translate-y-1 transition-all duration-300 ease-in-out z-50 flex items-center justify-center"
+        className="fixed bottom-10 left-8 md:left-10 w-20 h-12 hover:-translate-y-1 transition-all duration-300 ease-in-out z-50 flex items-center justify-center"
       >
         <img 
           src={youtubeImg} 
