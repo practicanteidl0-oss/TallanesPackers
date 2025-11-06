@@ -38,7 +38,7 @@ export default function ProductoDestinos({
           <img src={imagen} alt={nombre} className="h-40 sm:h-48 object-contain" />
         </div>
         {/* Paneles overlay */}
-        <div className={`absolute ${panelsClass} z-20 flex flex-col gap-4 sm:gap-6 w-[260px] sm:w-[300px]`}>
+        <div className={`absolute ${panelsClass} z-20 flex flex-col gap-4 sm:gap-6  w-[260px] sm:w-[300px]`}>
           <Panel titulo="Con tratamiento hidrotermico" lista={paisesConTratamiento} />
           <Panel titulo="Sin tratamiento hidrotermico" lista={paisesSinTratamiento} />
         </div>

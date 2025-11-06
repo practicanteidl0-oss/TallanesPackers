@@ -8,6 +8,7 @@ import CardsTallanes from "./components/CardsTallanes";
 import videoTallanes from "./assets/videos/videotallanes.mp4";
 import { LiquidGlass } from "@liquidglass/react";
 import ProductosYBeneficios from "./components/ProductosYBeneficios";
+import ProductosContadores from "./components/ProductosContadores";
 const WorldMap = lazy(() => import("./components/ui/world-map"));
 import ProductoDestinos from "./components/ui/ProductoDestinos";
 import mangoImg from "./assets/images/productos/Mango.png";
@@ -97,18 +98,13 @@ function App() {
       {/* Sección Productos y Beneficios */}
       <ProductosYBeneficios />
 
+   
+
       {/* WorldMap con UI superpuesta interactiva */}
       <div className="relative">
-        <Suspense
-          fallback={
-            <div className="w-full aspect-[2/1] bg-gray-100 rounded-lg animate-pulse" />
-          }
-        >
-          <WorldMap dots={dotsMemo} lineColor={tratamientoSeleccionado === "con" ? "#0ea5e9" : "#22c55e"} />
-        </Suspense>
-
-        {/* Tarjetas clicables (izquierda) */}
-        <div className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
+        {/* Tarjetas clicables (móvil: arriba estáticas; desktop: izquierda medio absolutas) */}
+        <div className="mt-6 left-0 right-0 z-20 flex justify-center md:absolute md:left-8 md:right-auto md:justify-start md:top-1/2 md:-translate-y-1/2 md:mb-0">
+          <div className="grid grid-cols-2 gap-2 w-[92vw] max-w-[380px] md:w-auto md:grid-cols-1 md:flex md:flex-col md:gap-3">
           {Object.keys(productos).map((nombre) => {
             const seleccionado = productoSeleccionado === nombre;
             return (
@@ -117,7 +113,7 @@ function App() {
                 onClick={() => setProductoSeleccionado(nombre)}
                 aria-pressed={seleccionado}
                 className={
-                  `group w-[170px] sm:w-[200px] px-3 py-2 rounded-xl border transition-all duration-150 ease-out ` +
+                  `group w-full md:w-[200px] px-3 py-2 rounded-xl border transition-all duration-150 ease-out ` +
                   (seleccionado
                     ? "bg-white/95 border-sky-400 ring-2 ring-sky-300 shadow-xl"
                     : "bg-white/85 border-gray-200 hover:border-sky-300 hover:shadow-lg")
@@ -130,10 +126,29 @@ function App() {
               </button>
             );
           })}
+          </div>
         </div>
 
-        {/* Panel derecho (reutilizable y desplegable) */}
-        <div className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-4 w-[280px] md:w-[320px]">
+        <Suspense
+          fallback={
+            <div className="w-full aspect-[2/1] bg-gray-100 rounded-lg animate-pulse" />
+          }
+        >
+          <WorldMap
+            dots={dotsMemo}
+            lineColor={tratamientoSeleccionado === "con" ? "#0ea5e9" : "#22c55e"}
+            mapDotColor="#79716b" // Slate con transparencia
+            mapBgColor="#f9fafb" // Gris muy claro
+            mobileAspect="aspect-[3/2]"
+            desktopAspect="md:aspect-[2/1]"
+          />
+        </Suspense>
+
+        
+
+        {/* Panel opciones (móvil: debajo del mapa; desktop: derecha medio) */}
+        <div className="mt-2 mb-4 left-0 right-0 z-20 flex justify-center md:absolute md:right-8 md:left-auto md:justify-start md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:mt-0 md:mb-0">
+          <div className="flex flex-col gap-3 w-[92vw] max-w-[360px] md:w-[320px]">
           {[
             { clave: "con", titulo: "Con tratamiento", lista: productos[productoSeleccionado].con },
             { clave: "sin", titulo: "Sin tratamiento", lista: productos[productoSeleccionado].sin },
@@ -158,7 +173,7 @@ function App() {
                   }}
                   aria-selected={seleccionado}
                   aria-expanded={abierto}
-                  className="flex items-center justify-between w-full px-4 py-3"
+                  className="flex items-center justify-between w-full px-3 py-2"
                 >
                   <div className="flex items-center gap-2">
                     <span className={`${seleccionado ? "bg-sky-500" : "bg-gray-300"} h-2 w-2 rounded-full`} />
@@ -173,7 +188,7 @@ function App() {
                     <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
-                <div className={`grid grid-cols-2 gap-2 px-4 pb-4 transition-[max-height,opacity] duration-200 ease-out ${abierto ? "max-h-64 opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}>
+                <div className={`grid grid-cols-2 gap-2 px-3 pb-2 transition-[max-height,opacity] duration-200 ease-out ${abierto ? "max-h-[40vh] opacity-100 overflow-auto" : "max-h-0 opacity-0 overflow-hidden"}`}>
                   {lista.map((p) => (
                     <span key={p} className="inline-flex items-center justify-center rounded-md border border-sky-200 bg-sky-50 text-sky-700 px-2.5 py-1 text-xs font-medium">
                       {p}
@@ -183,8 +198,12 @@ function App() {
               </div>
             );
           })}
+          </div>
         </div>
       </div>
+      {/* Sección Contenedores Exportados */}
+      <ProductosContadores />
+
     </>
   );
 }

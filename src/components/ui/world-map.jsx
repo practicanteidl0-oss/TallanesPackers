@@ -12,17 +12,21 @@ function WorldMap({
       end: { lat: 25.7617, lng: -80.1918 }
     }
   ],
-  lineColor = "#0ea5e9"
+  lineColor = "#0ea5e9",
+  mapDotColor = "#00000040",
+  mapBgColor = "white",
+  mobileAspect = "aspect-[2/1]",
+  desktopAspect = "md:aspect-[2/1]",
 }) {
   const svgRef = useRef(null);
   const map = useMemo(() => new DottedMap({ height: 100, grid: "diagonal" }), []);
 
   const svgMap = useMemo(() => map.getSVG({
     radius: 0.22,
-    color: "#00000040",
+    color: mapDotColor,
     shape: "circle",
-    backgroundColor: "white",
-  }), [map]);
+    backgroundColor: mapBgColor,
+  }), [map, mapDotColor, mapBgColor]);
 
   const projectPoint = (lat, lng) => {
     const x = (lng + 180) * (800 / 360);
@@ -41,17 +45,19 @@ function WorldMap({
 
   return (
     <div
-      className="w-full aspect-[2/1] bg-white rounded-lg relative font-sans">
+      className={`w-full ${mobileAspect} ${desktopAspect} bg-white rounded-lg relative font-sans`}>
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
         alt="world map"
         height="495"
         width="1056"
+        loading="lazy"
         draggable={false} />
       <svg
         ref={svgRef}
         viewBox="0 0 800 400"
+        preserveAspectRatio="xMidYMid meet"
         className="w-full h-full absolute inset-0 pointer-events-none select-none">
         {dots.map((dot, i) => {
           const startPoint = projectPoint(dot.start.lat, dot.start.lng);
