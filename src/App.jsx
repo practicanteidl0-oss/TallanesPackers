@@ -10,6 +10,7 @@ import { LiquidGlass } from "@liquidglass/react";
 import ProductosYBeneficios from "./components/ProductosYBeneficios";
 import ProductosContadores from "./components/ProductosContadores";
 import Certificaciones from "./components/Certificaciones";
+import Aliados from "./components/Aliados";
 const WorldMap = lazy(() => import("./components/ui/world-map"));
 import ProductoDestinos from "./components/ui/ProductoDestinos";
 import mangoImg from "./assets/images/productos/Mango.png";
@@ -207,6 +208,9 @@ function App() {
 
       {/* Sección Certificaciones */}
       <Certificaciones />
+
+      {/* Sección Aliados */}
+      <Aliados />
 
     </>
   );
