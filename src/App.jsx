@@ -9,6 +9,7 @@ import videoTallanes from "./assets/videos/videotallanes.mp4";
 import { LiquidGlass } from "@liquidglass/react";
 import ProductosYBeneficios from "./components/ProductosYBeneficios";
 import ProductosContadores from "./components/ProductosContadores";
+import Certificaciones from "./components/Certificaciones";
 const WorldMap = lazy(() => import("./components/ui/world-map"));
 import ProductoDestinos from "./components/ui/ProductoDestinos";
 import mangoImg from "./assets/images/productos/Mango.png";
@@ -203,6 +204,9 @@ function App() {
       </div>
       {/* Sección Contenedores Exportados */}
       <ProductosContadores />
+
+      {/* Sección Certificaciones */}
+      <Certificaciones />
 
     </>
   );
