@@ -11,10 +11,16 @@ import ProductosYBeneficios from "./components/ProductosYBeneficios";
 import ProductosContadores from "./components/ProductosContadores";
 import Certificaciones from "./components/Certificaciones";
 import Aliados from "./components/Aliados";
+import CardsFlipStack from "./components/ui/cards-stack/CardsFlipStack";
 const WorldMap = lazy(() => import("./components/ui/world-map"));
 import ProductoDestinos from "./components/ui/ProductoDestinos";
 import mangoImg from "./assets/images/productos/Mango.png";
 import aguacateImg from "./assets/images/productos/Palta.png";
+import Max1 from "./assets/images/equipo/MaxH.png";
+import Max2 from "./assets/images/equipo/MaxH2.png";
+import Miguel1 from "./assets/images/equipo/MiguelH.png";
+import Miguel2 from "./assets/images/equipo/MiguelH2.png";
+import Ruth1 from "./assets/images/equipo/RuthH.png";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -24,6 +30,21 @@ function App() {
   // Estado confirmado para render del mapa y opción
   const [productoConfirmado, setProductoConfirmado] = useState("Mango");
   const [tratamientoSeleccionado, setTratamientoSeleccionado] = useState("con");
+
+  const dataCardStack = [
+    {
+      id: 1,
+      img: Max1,
+    },
+    {
+      id: 2,
+      img: Miguel1,
+    },
+    {
+      id: 3,
+      img: Ruth1,
+    },
+  ]
 
   const productos = {
     Mango: {
@@ -211,6 +232,9 @@ function App() {
 
       {/* Sección Aliados */}
       <Aliados />
+
+      {/* Demo Cards Stack */}
+      <CardsFlipStack items={dataCardStack} />
 
     </>
   );
